@@ -1,0 +1,1 @@
+A shortest dependency path relationship extraction approach
