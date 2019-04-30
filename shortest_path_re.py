@@ -51,7 +51,7 @@ class ShortestPathRE:
         shortest_path = None
 
         try:
-            shortest_path = nx.shortest_path(graph, source=e1, target=e2)
+            shortest_path = nx.shortest_path(graph, source=e1.lower(), target=e2.lower())
         except NodeNotFound as err:
             logger.warning(f'Node not found: {err}')
         except NetworkXNoPath as err:
