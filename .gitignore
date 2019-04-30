@@ -110,6 +110,5 @@ ENV/
 *.rdf
 
 # MISC
-data/
 blablub.py
 models/
