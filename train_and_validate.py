@@ -151,5 +151,5 @@ def validate_classifier():
     print(f'Total result: {total_result}')
 
 
-#train_classifier('data/SemEval2010/train.txt')
+train_classifier('data/SemEval2010/train.txt')
 validate_classifier()
