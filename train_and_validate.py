@@ -43,7 +43,8 @@ def extract_sentence(text):
     entity2 = entity2_match.group()
 
     # clean up special characters
-    sentence = re.sub('"|<(\/)?e\d>', '', sentence)
+    sentence = re.sub(r'"|<(\/)?e\d>', ' ', sentence)
+    sentence = re.sub(r'\s{2,}', ' ', sentence)
     e1 = re.sub(r'<(\/)?e\d>', '', entity1)
     e2 = re.sub(r'<(\/)?e\d>', '', entity2)
 
@@ -176,6 +177,6 @@ def validate_classifier():
     print(f'Total result: {total_result}')
 
 
-#train_classifier('data/SemEval2010/train.txt')
+train_classifier('data/SemEval2010/train.txt')
 validate_classifier()
 
