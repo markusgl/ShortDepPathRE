@@ -26,19 +26,6 @@ class ShortestPathRE:
 
         return cls(embeddings_model, nlp)
 
-    def search_shortest_dep_path(self, e1, e2, sentence, plot_graph=False):
-        graph = self.__build_undirected_graph(sentence, plot_graph)
-        shortest_path = None
-
-        try:
-            shortest_path = nx.shortest_path(graph, source=e1.lower(), target=e2.lower())
-        except NodeNotFound as err:
-            logger.warning(f'Node not found: {err}')
-        except NetworkXNoPath as err:
-            logger.warning(f'Path not found: {err}')
-
-        return shortest_path
-
     def __build_undirected_graph(self, sentence, plot=False):
         doc = self.nlp(sentence)
         edges = []
@@ -67,3 +54,17 @@ class ShortestPathRE:
 
         plt.axis('off')  # disable axis plot
         plt.show()
+
+    def search_shortest_dep_path(self, e1, e2, sentence, plot_graph=False):
+        graph = self.__build_undirected_graph(sentence, plot_graph)
+        shortest_path = None
+
+        try:
+            shortest_path = nx.shortest_path(graph, source=e1.lower(), target=e2.lower())
+        except NodeNotFound as err:
+            logger.warning(f'Node not found: {err} - Sentence: {sentence}; Entity1: {e1}; Entity2: {e2}')
+        except NetworkXNoPath as err:
+            logger.warning(f'Path not found: {err} - Sentence: {sentence}; Entity1: {e1}; Entity2: {e2}')
+
+        return shortest_path
+

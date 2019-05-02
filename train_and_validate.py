@@ -19,6 +19,20 @@ embeddings = FlairEmbeddingModels().en_lang()
 rt = RelationTypes()
 
 
+def replace_multi_word_entity(sentence, entity):
+    """
+    Replaces multi-word entities separated by a whitespace with an underscore
+    """
+    if sentence.find(entity) > -1:
+        e_array = entity.split()
+        e_new = e_array[0] + '_' + e_array[1]
+        sentence = sentence.replace(entity, e_new)
+    else:
+        e_new = entity
+
+    return sentence, e_new
+
+
 def extract_sentence(text):
     sentence_match = re.search(r'".*"', text)
     sentence = sentence_match.group()
@@ -32,6 +46,17 @@ def extract_sentence(text):
     sentence = re.sub('"|<(\/)?e\d>', '', sentence)
     e1 = re.sub(r'<(\/)?e\d>', '', entity1)
     e2 = re.sub(r'<(\/)?e\d>', '', entity2)
+
+    # search for multi word entities
+    if len(e1.split()) > 1:
+        sentence, e1 = replace_multi_word_entity(sentence, e1)
+    if len(e2.split()) > 1:
+        sentence, e2 = replace_multi_word_entity(sentence, e2)
+
+    # replace hyphens with underscore to prevent tokenization
+    sentence = sentence.replace('-', '_')
+    e1 = e1.replace('-', '_')
+    e2 = e2.replace('-', '_')
 
     return sentence, e1, e2
 
@@ -151,5 +176,6 @@ def validate_classifier():
     print(f'Total result: {total_result}')
 
 
-train_classifier('data/SemEval2010/train.txt')
+#train_classifier('data/SemEval2010/train.txt')
 validate_classifier()
+
