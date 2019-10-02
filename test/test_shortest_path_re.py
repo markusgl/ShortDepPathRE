@@ -8,3 +8,5 @@ def test_extract_sentence():
     spre = ShortestPathRE().en_lang()
     sp = spre.search_shortest_dep_path(e1=e1, e2=e2, sentence=sentence)
     assert sp == ['thesis', 'defines', 'clinical_characteristics']
+
+
