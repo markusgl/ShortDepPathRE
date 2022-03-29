@@ -38,7 +38,7 @@ networkx==2.3
 nltk==3.4.5
 numpy==1.16.3
 pandas==0.24.2
-paramiko==2.4.2
+paramiko==2.10.1
 Pillow==8.3.2
 plac==0.9.6
 pluggy==0.9.0
