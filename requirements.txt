@@ -35,7 +35,7 @@ more-itertools==7.0.0
 mpld3==0.3
 murmurhash==1.0.2
 networkx==2.3
-nltk==3.4.5
+nltk==3.6.5
 numpy==1.16.3
 pandas==0.24.2
 paramiko==2.4.2
